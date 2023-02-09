@@ -1,0 +1,292 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer a ride</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/a53a8629e3.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<style>
+    .offerdiv {
+        background-image: url("{% static 'rideshare5.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 500px;
+    }
+    
+    .navbar {
+        background-color: #1B1B1B;
+        font-weight: bold;
+    }
+    
+    .navbar-brand {
+        color: red;
+    }
+    
+    .navbar-brand:hover {
+        color: red;
+    }
+    
+    .navbar-toggler {
+        border-color: white;
+    }
+    
+    .navbar-toggler-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: red;
+    }
+    
+    a {
+        color: red;
+    }
+    
+    input {
+        background-color: #353839;
+        border-color: white;
+        color: white;
+        padding: 13px;
+        width: 90%;
+        margin-left: 10px;
+        color: #708c91;
+        height: 25px;
+        border: none;
+        border-radius: 4px;
+        font-size: medium;
+        font-weight: 600;
+    }
+    
+    input:focus {
+        outline: 0;
+    }
+    
+    .btnd {
+        align-self: center;
+        justify-self: center;
+    }
+    
+    .offh {
+        align-self: center;
+        justify-self: center;
+        margin-bottom: -14px;
+        margin-top: 4px;
+    }
+    
+    h6 {
+        color: white;
+    }
+    
+    .btn {
+        text-align: center;
+        width: 115px;
+        height: 35px;
+        border-color: red;
+        background-color: red;
+        color: white;
+        /* border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px; */
+        outline-width: 0;
+        outline-color: red;
+        /* font-size: larger;
+    font-weight: 700; */
+    }
+    
+    .btn:hover {
+        color: white;
+    }
+    
+    .btn:focus {
+        outline: 0;
+        outline-color: #00AFF5;
+    }
+    
+    .b {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-items: center;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: #1B1B1B;
+        width: 250px;
+        height: 290px;
+        padding: 10px;
+        /* border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px; */
+    }
+    
+    hr {
+        width: 100%;
+        margin: 0;
+        color: #708c91;
+    }
+    
+    .bod {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .driver {
+        /* font-size: 25px;
+    font-weight: 900; */
+        text-align: center;
+    }
+    
+    h1 {
+        color: white;
+    }
+    
+    .carpool {
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+    
+    .poolct {
+        margin-top: 20px;
+    }
+    
+    h4 {
+        font-weight: 900;
+        color: red;
+    }
+    
+    h5 {
+        color: #1B1B1B;
+        font-weight: 600;
+    }
+    
+    p {
+        color: #414A4C;
+        font-weight: 400;
+    }
+    
+    .botf {
+        background-color: #1B1B1B;
+        padding: 30px;
+    }
+    
+    .fct {
+        color: red;
+    }
+    
+    li {
+        color: white;
+    }
+    
+    i {
+        margin: 2px;
+        size: 20px;
+    }
+    /*         
+    .b:last-child {
+      
+    } */
+</style>
+
+<body>
+    <div>
+        {% include 'navbar.html' %}
+    </div>
+    <div class="container-fluid offerdiv">
+
+        <div class="row">
+            <div class="col-7">
+                <h1>Become a <span style="color: red;">rideshare</span> driver and save</h1>
+                <h1>on travel cost by sharing your ride with passengers.</h1>
+            </div>
+            <div class="col-5">
+                <div class="bod">
+                    <div>
+                        <form action="{% url 'offer' %}" method="POST">
+                            {% csrf_token %}
+                            <div class="b">
+                                <div class="offh">
+                                    <h6>Offer Ride</h6>
+                                </div>
+                                <div class="formGroup">
+                                    <input style="color: white;" type="text" placeholder="From" name="from" id="search_input" required autocomplete="off">
+
+                                </div>
+                                <div class="formGroup">
+                                    <input style="color: white;" type="text" placeholder="To" name="to" id="" required autocomplete="off">
+
+                                </div>
+                                <div class="formGroup"><input style="color: white;" type="date" placeholder="Today" name="date" required autocomplete="off">
+
+                                </div>
+                                <div class="formGroup">
+                                    <input style="color: white;" value="1" type="text" name="noOfp" id="" required autocomplete="off">
+
+                                </div>
+
+                                <div class="btnd">
+                                    <button type="submit" class="btn" id="offer">Publish</button>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container carpool">
+        <div class="row">
+            <h4>The best of carpooling with RideShare</h4>
+        </div>
+        <div class="row justify-content-center ">
+            <div class="col-4 poolct">
+                <h5>Save on travel costs</h5>
+                <p>Share your travel costs and save every time you travel by car. Plus, for your 1st ride on BlaBlaCar with at least one passenger, you’ll get a 25€ fuel voucher or 40€ car wash voucher.</p>
+
+            </div>
+            <div class="col-4 poolct">
+                <h5>Join a trustworthy community</h5>
+                <p>We know each of our members: both drivers and passengers. We verify ratings, profiles and IDs, so you know exactly who you’re travelling with.</p>
+            </div>
+            <div class="col-4 poolct">
+                <h5>Carpooling made simple</h5>
+                <p>Our technology makes the entire experience with BlaBlaCar simple, so you can easily find, chat with and meet passengers right on your way.</p>
+            </div>
+        </div>
+    </div>
+    {% include 'footer.html' %}
+    <script>
+        $("form").submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                    method: "POST",
+                    url: "offer",
+                    data: $("form").serialize()
+                })
+                .done(function(msg) {
+                    if (msg == '200') {
+
+
+                        swal("Offer posted!", "you successfully publish a ride offer!", "success");
+                    } else {
+                        swal("try to login", "you must login to publish a ride", "error")
+                    }
+                })
+               
+        });
+    </script>
+</body>
+
+</html>

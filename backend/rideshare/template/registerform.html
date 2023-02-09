@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- jQuery CDN Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>RideSharing</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="btn">
+                <button class="signUpBtn" style="color:#7CFC00; border-bottom: 2px solid #ff4141;">SIGN UP</button>
+
+                <a class="loginBtn" href="{% url 'loginform' %}" style="  padding: 3px;
+    margin: 30px 0px 40px 30px;
+    border-style: none;
+    background-color: transparent;
+    color: beige;
+    font-size: 18px;
+    font-weight: 550;
+    text-decoration:none ">LOG IN</a>
+
+            </div>
+
+            <form class="signUp" action="{% url 'register' %}" method="POST">
+
+                {% csrf_token %}
+                <div class="formGroup">
+                    <input type="text" placeholder="User name" name="user name" required autocomplete="off">
+                </div>
+                <div class="formGroup">
+
+
+                    <input type="email" placeholder="Email ID" name="email" required autocomplete="off">
+                </div>
+                <div class="formGroup">
+                    <input type="password" id="password" name="password" placeholder="Password" required autocomplete="off">
+
+                </div>
+                <div class="formGroup">
+                    {% if messages %}
+                    <ul class="messages"> {% for message in messages %}
+                        <li style="color:red" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li> {% endfor %} </ul> {% endif %}
+                </div>
+                <div class="checkBox">
+                    <input type="checkbox" name="checkbox" id="checkbox">
+                    <span class="text">I agree with term & conditions</span>
+                </div>
+                <div class="formGroup">
+                    <button type="submit" class="btn2"><span id="IL_AD1" class="IL_AD">REGISTER</span></button>
+
+
+            </form>
+
+
+
+
+            </div>
+        </div>
+
+
+</body>
+
+</html>

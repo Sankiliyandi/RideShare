@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+    <!-- jQuery CDN Link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>RideSharing</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form">
+            <div class="btn">
+                <a class="loginBtn" href="{% url 'register' %}" style="  padding: 3px;
+    margin: 30px 0px 40px 30px;
+    border-style: none;
+    background-color: transparent;
+    color: beige;
+    font-size: 18px;
+    font-weight: 550;
+    text-decoration:none ">SIGN UP</a>
+
+                <button class="loginBtn" style="color:#7CFC00; border-bottom: 2px solid #ff4141;">LOG IN</button>
+            </div>
+
+
+            <!------ Login Form -------- -->
+            <form class="signup" action="{% url 'loginform' %}" method="POST">
+                {% csrf_token %}
+                <div class="formGroup">
+                    <input type="email" placeholder="Email ID" name="email" required autocomplete="off">
+                </div>
+                <div class="formGroup">
+                    <input type="password" id="password" name="password" placeholder="Password" required autocomplete="off">
+
+                </div>
+                <div class="formGroup">
+                    {% if messages %}
+                    <ul class="messages"> {% for message in messages %}
+                        <li style="color:red" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li> {% endfor %} </ul> {% endif %}
+                </div>
+                <div class="checkBox">
+                    <input type="checkbox" name="checkbox" id="checkbox">
+                    <span class="text">Keep me signed in on this device</span>
+                </div>
+                <div class="formGroup">
+                    <button type="submit" class="btn2">LOGIN</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
