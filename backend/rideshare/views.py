@@ -10,7 +10,8 @@ from .models import user,offerARide
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
-
+from .otpHandler import otp
+import random
 
 # Create your views here.
 @csrf_exempt
@@ -27,6 +28,7 @@ def register(request):
         passWord=request.POST.get('password')
         username=request.POST.get('user name')
         emailId=request.POST.get('email')
+        phoneNo=request.POST.get('phoneNo')
         print(username)
         print(passWord)
         print(request.POST)
@@ -36,13 +38,20 @@ def register(request):
           return render(request,'registerform.html')
        
         else:
-         userData=user(uname=username,email_id=emailId, password=passWord)
+         userData=user(uname=username,email_id=emailId, password=passWord,phoneNo=phoneNo)
          userData.save()
          request.session['email'] = emailId
          request.session['password']=passWord
          request.session['username']=username
+         request.session['phoneNo']=phoneNo
          request.session['login']=True
-         return HttpResponseRedirect("/")
+         phone="+91"+phoneNo 
+         rcode=random.randint(1000,9999)
+         code=str(rcode)
+         request.session['otpcode']=code
+         print(phone) 
+         otp(phone,code)
+         return HttpResponseRedirect("otp")
          #return home(request, emailId)
 def loginform(request):
     if(request.method=="GET"):
@@ -119,7 +128,20 @@ def searchRide(request):
    else:
      return render(request,'search.html')
 
-
+def otpScreen(request):
+    
+     if(request.method=="GET"):
+      return  render(request,'otp.html')  
+     else:
+        otpCode=request.POST.get('otpCode')
+        code= request.session['otpcode']
+        if otpCode==code:
+          return HttpResponseRedirect("/")
+        else:
+           messages.error(request,'incorrect code')
+           return render(request,'otp.html') 
+        
+       
    
  
  

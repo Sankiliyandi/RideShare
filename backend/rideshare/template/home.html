@@ -15,6 +15,22 @@
 
 </head>
 <style>
+    *,
+    *:after,
+    *:before {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    
+    html,
+    body {
+        /* background: #D3D3D3; */
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
     .offerdiv {
         display: flex;
         justify-content: center;
@@ -135,11 +151,26 @@
         color: #708c91;
     }
     
-    .bod {
-        position: absolute;
-        z-index: 1000;
-        bottom: 150px;
-        left: 550px;
+    .find {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    @media screen and (min-width:800px) {
+        .bod {
+            position: absolute;
+            z-index: 1000;
+            bottom: 150px;
+        }
+    }
+    
+    @media screen and (max-width:800px) {
+        .bod {
+            z-index: 1000;
+            bottom: 150px;
+            position: absolute;
+        }
     }
     
     .driver {
@@ -220,9 +251,9 @@
 
 
     </div>
-    </div>
-    <div class="bod">
-        <div>
+    <div class="find">
+        <div class="bod">
+
             <form action="{% url 'offer' %}" method="POST">
                 {% csrf_token %}
                 <div class="b">
@@ -252,9 +283,10 @@
 
                 </div>
             </form>
+
+
+
         </div>
-
-
     </div>
     <div class="container em"></div>
     <div class="container carpool">

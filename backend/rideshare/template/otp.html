@@ -17,39 +17,26 @@
     <div class="container">
         <div class="form">
             <div class="btn">
-                <button class="signUpBtn" style="color:#7CFC00; border-bottom: 2px solid #ff4141;">SIGN UP</button>
-
-                <a class="loginBtn" href="{% url 'loginform' %}" style="  padding: 3px;
+                <!-- <a class="loginBtn" href="{% url 'register' %}" style="  padding: 3px;
     margin: 30px 0px 40px 30px;
     border-style: none;
     background-color: transparent;
     color: beige;
     font-size: 18px;
     font-weight: 550;
-    text-decoration:none ">LOG IN</a>
+    text-decoration:none ">SIGN UP</a> -->
 
+                <button class="loginBtn" style="color:#7CFC00; border-bottom: 2px solid #ff4141;">OTP</button>
             </div>
 
-            <form class="signUp" action="{% url 'register' %}" method="POST">
 
+            <!------ Login Form -------- -->
+            <form class="signup" action="{% url 'otp' %}" method="POST">
                 {% csrf_token %}
                 <div class="formGroup">
-                    <input type="text" placeholder="User name" name="user name" required autocomplete="off">
+                    <input type="text" placeholder="code" name="otpCode" required autocomplete="off">
                 </div>
-                <div class="formGroup">
 
-
-                    <input type="tel" placeholder="phone no" name="phoneNo" required autocomplete="off">
-                </div>
-                <div class="formGroup">
-
-
-                    <input type="email" placeholder="Email ID" name="email" required autocomplete="off">
-                </div>
-                <div class="formGroup">
-                    <input type="password" id="password" name="password" placeholder="Password" required autocomplete="off">
-
-                </div>
                 <div class="formGroup">
                     {% if messages %}
                     <ul class="messages"> {% for message in messages %}
@@ -57,19 +44,16 @@
                 </div>
                 <div class="checkBox">
                     <input type="checkbox" name="checkbox" id="checkbox">
-                    <span class="text">I agree with term & conditions</span>
+                    <span class="text">Keep me signed in on this device</span>
                 </div>
                 <div class="formGroup">
-                    <button type="submit" class="btn2"><span id="IL_AD1" class="IL_AD">REGISTER</span></button>
-
+                    <button type="submit" class="btn2">Verify</button>
+                </div>
 
             </form>
 
-
-
-
-            </div>
         </div>
+    </div>
 
 
 </body>

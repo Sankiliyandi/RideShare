@@ -10,6 +10,7 @@ class user(models.Model):
            uname=models.CharField(max_length=50)
            email_id=models.EmailField(primary_key=True)
            password=models.CharField(max_length=100)
+           phoneNo=models.CharField(max_length=10)
 
 # class offerRide(models.Model):
 #            emai_id=models.EmailField()
