@@ -90,12 +90,13 @@ def offerpost(request):
     Date=request.POST.get('date')
     emailSES=request.session['email']
     username=request.session['username']
+    phoneNO=request.session['phoneNo']
     nofp=request.POST.get('noOfp')
     print(LFrom)
     print(emailSES)
     print(Date)
     print(LFrom)
-    offerData=offerARide(email_id=emailSES,uname=username,date=Date,leavingfrom=LFrom,goingto=Gto,noOfPassenger=nofp)
+    offerData=offerARide(email_id=emailSES,uname=username,date=Date,leavingfrom=LFrom,goingto=Gto,noOfPassenger=nofp,phoneNO=phoneNO)
     offerData.save()
     return HttpResponse('200')
    except:

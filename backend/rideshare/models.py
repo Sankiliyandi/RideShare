@@ -26,3 +26,4 @@ class offerARide(models.Model):
            leavingfrom=models.CharField(max_length=100)
            goingto=models.CharField(max_length=100)
            noOfPassenger=models.CharField(max_length=10)
+           phoneNo=models.CharField(max_length=10)
