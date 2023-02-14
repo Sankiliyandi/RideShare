@@ -1,14 +1,10 @@
-import http
 from django.core.serializers import serialize
-from datetime import datetime
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-#from matplotlib.font_manager import json_dump
 from .form import*
 from .models import user,offerARide
 from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.decorators import login_required
 from django.contrib.sessions.models import Session
 from .otpHandler import otp
 import random
@@ -38,8 +34,7 @@ def register(request):
           return render(request,'registerform.html')
        
         else:
-         userData=user(uname=username,email_id=emailId, password=passWord,phoneNo=phoneNo)
-         userData.save()
+        
          request.session['email'] = emailId
          request.session['password']=passWord
          request.session['username']=username
@@ -52,7 +47,7 @@ def register(request):
          print(phone) 
          otp(phone,code)
          return HttpResponseRedirect("otp")
-         #return home(request, emailId)
+      
 def loginform(request):
     if(request.method=="GET"):
      print("naaaa")
@@ -136,7 +131,15 @@ def otpScreen(request):
      else:
         otpCode=request.POST.get('otpCode')
         code= request.session['otpcode']
+        emailId=request.session['email'] 
+        passWord=request.session['password']
+        username=request.session['username']
+        phoneNo=request.session['phoneNo']
+        request.session['login']=True
+      
         if otpCode==code:
+          userData=user(uname=username,email_id=emailId, password=passWord,phoneNo=phoneNo)
+          userData.save()
           return HttpResponseRedirect("/")
         else:
            messages.error(request,'incorrect code')
