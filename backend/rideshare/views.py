@@ -113,6 +113,7 @@ def searchRide(request):
       LFrom=request.POST.get('from').lower()
       Gto=request.POST.get('to').lower()
       Date=request.POST.get('date')
+      print(Date)
       if offerARide.objects.filter(date=Date,leavingfrom=LFrom,goingto=Gto):
           offerData=offerARide.objects.filter(date=Date,leavingfrom=LFrom,goingto=Gto).only()
           offerJSON=serialize("json",offerData)

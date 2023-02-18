@@ -209,6 +209,79 @@
             /* #ffd700 */
         }
     }
+    
+    @media screen and (min-width:500px) {
+        .mob {
+            display: none;
+        }
+        .sfo {
+            display: block;
+        }
+    }
+    
+    @media screen and (max-width:600px) {
+        .sfo {
+            display: none;
+        }
+        .mob {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+    
+    .b {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-items: center;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: #1B1B1B;
+        width: 250px;
+        height: 290px;
+        padding: 10px;
+        /* border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px; */
+    }
+    
+    .offh {
+        align-self: center;
+        justify-self: center;
+        margin-bottom: -14px;
+        margin-top: 4px;
+        color: white;
+    }
+    
+    .btnd {
+        align-self: center;
+        justify-self: center;
+    }
+    
+    .btn {
+        text-align: center;
+        width: 115px;
+        height: 35px;
+        border-color: red;
+        background-color: red;
+        color: white;
+        /* border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px; */
+        outline-width: 0;
+        outline-color: red;
+        /* font-size: larger;
+    font-weight: 700; */
+    }
+    
+    .btn:hover {
+        color: white;
+    }
+    
+    .btn:focus {
+        outline: 0;
+        outline-color: #00AFF5;
+    }
 </style>
 
 <body>
@@ -226,7 +299,7 @@
                         <input style="color: white;" type="text" placeholder="to" name="to" class="form control" required>
                     </div>
                     <div class="col-3">
-                        <input style="color: white;" type="date" name="date" id="" required>
+                        <input style="color: white;" type="date" placeholder="Today" name="date" id="ttt" required>
                     </div>
                     <div class="col-1">
                         <input style="color: white;" type="text" value="1" name="noofp" class="form control" required>
@@ -238,6 +311,41 @@
             </form>
         </div>
     </div>
+
+    <!-- <div class="mob">
+        <div>
+            <form action="{% url 'search' %}" method="POST">
+                {% csrf_token %}
+                <div class="b">
+                    <div class="offh">
+                        <h6>Search Ride</h6>
+                    </div>
+                    <div class="formGroup">
+                        <input style="color: white;" type="text" placeholder="From" name="from" id="search_input" required autocomplete="off">
+
+                    </div>
+                    <div class="formGroup">
+                        <input style="color: white;" type="text" placeholder="To" name="to" id="" required autocomplete="off">
+
+                    </div>
+                    <div class="formGroup">
+                        <input style="color: white;" type="date" placeholder="Today" name="date" required autocomplete="off">
+
+                    </div>
+                    <div class="formGroup">
+                        <input style="color: white;" value="1" type="text" name="noOfp" id="" required autocomplete="off">
+
+                    </div>
+
+                    <div class="btnd">
+                        <button type="submit" class="btn" id="offer">Search</button>
+                    </div>
+
+
+                </div>
+            </form>
+        </div>
+    </div> -->
 
     <div class="container res" id="res">
 
@@ -326,6 +434,8 @@
     <script>
         $("form").submit(function(event) {
             event.preventDefault();
+            var df = $('#ttt').val()
+            console.log(df)
 
             function loadData() {
                 $('#res').append('<div style=" align-self: center;" class="loader"></div>')
@@ -339,7 +449,7 @@
                     $('#res').append('<div style=" align-self: center;" class="loader"></div>')
                     if (offerData == '404') {
                         $('#res').empty();
-                        var d = $('<h4 class="text-center" style="color: #1B1B1B; font-weight:900;">No ride found</h4>')
+                        var d = $('<h4 class="text-center mt-3" style="color: #1B1B1B; font-weight:900;">No ride found</h4>')
                         $('#res').append(d);
                     } else {
                         $('#res').empty();

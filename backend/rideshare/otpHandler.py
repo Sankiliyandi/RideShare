@@ -1,7 +1,4 @@
-
 from twilio.rest import Client
-
-
 
 
 def otp(phoneNo,code):
