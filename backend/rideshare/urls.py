@@ -10,6 +10,7 @@ urlpatterns = [
     # path('registerform/' ,formHandle,name='signup'),
     path('otp' ,otpScreen,name='otp'),
     path('login' ,loginform,name='loginform'),
+    path('logout' ,logout,name='logout'),
     path('search',searchRide,name='search'),
     path('offer',offerpost,name='offer'),
 ]

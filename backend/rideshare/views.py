@@ -12,10 +12,21 @@ import random
 # Create your views here.
 @csrf_exempt
 def home(request):
-     
-     return render(request,'home.html')
-
-
+     try:
+       login=request.session['login']
+       return render(request,'home.html',{'login':login})
+     except:
+       login=False
+       return render(request,'home.html',{'login':login})
+def logout(request):
+   request.session.modified = True
+   del request.session['email'] 
+   del request.session['password']
+   del request.session['username']
+  # del request.session['phoneNo']
+   del request.session['login']
+  # del request.session['otpcode']
+   return HttpResponseRedirect("/")
 def register(request):
     if(request.method == "GET"):
      print("naaaa")
@@ -65,7 +76,7 @@ def loginform(request):
          request.session['email'] = emailId
          request.session['password']=passWord
          request.session['username']=userLog.uname
-         request.session['login']=True
+        
          return HttpResponseRedirect("/")
         else:
            messages.error(request,'incorrect password')

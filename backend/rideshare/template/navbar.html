@@ -69,12 +69,18 @@
       </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    {% if login %}
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link" style="color: red;"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"  style="color: red; margin-right: 5px;"></i> Logout</a>
+                    </li>
+                    {% else %}
                     <li class="nav-item">
                         <a href="{% url 'register' %}" class="nav-link" style="color: red;"><i class="fa fa-user-circle-o" aria-hidden="true"  style="color: red; margin-right: 5px;"></i> Signin</a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'loginform' %}" class="nav-link" style="color: red;"><i class="fa fa-arrow-circle-o-right" aria-hidden="true"  style="color: red; margin-right: 5px;"></i> Login</a>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a href="{% url 'search' %}" class="nav-link" style="color: red;"> <i class="fa fa-search" aria-hidden="true" style="color: red; margin-right: 5px;"></i>Search</a>
                     </li>
