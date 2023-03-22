@@ -276,11 +276,12 @@
                     data: $("form").serialize()
                 })
                 .done(function(msg) {
+                    console.log(msg)
                     if (msg == '200') {
-
-
-                        swal("Offer posted!", "you successfully publish a ride offer!", "success");
+                        console.log('ssssss')
+                        swal("Offer posted!", "you successfully publish a ride offer!", "success")
                     } else {
+                        console.log('eeeeeeee')
                         swal("try to login", "you must login to publish a ride", "error")
                     }
                 })

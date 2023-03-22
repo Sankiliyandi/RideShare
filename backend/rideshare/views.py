@@ -14,7 +14,10 @@ import random
 def home(request):
      try:
        login=request.session['login']
-       return render(request,'home.html',{'login':login})
+       emailId=request.session['email']
+       userLog=user.objects.get(email_id=emailId)
+       username=userLog.uname
+       return render(request,'home.html',{'login':login ,'username':username})
      except:
        login=False
        return render(request,'home.html',{'login':login})
@@ -51,6 +54,8 @@ def register(request):
          request.session['username']=username
          request.session['phoneNo']=phoneNo
          request.session['login']=True
+         userLog=user.objects.get(email_id=emailId)
+         request.session['username']=userLog.uname
          phone="+91"+phoneNo 
          rcode=random.randint(1000,9999)
          code=str(rcode)
@@ -95,23 +100,33 @@ def offerpost(request):
     Gto=request.POST.get('to').lower()
     Date=request.POST.get('date')
     emailSES=request.session['email']
-    username=request.session['username']
-    phoneNO=request.session['phoneNo']
+    userLog=user.objects.get(email_id=emailSES)
+
+    username=userLog.uname
+    phoneNO=userLog.phoneNo
     nofp=request.POST.get('noOfp')
     print(LFrom)
     print(emailSES)
     print(Date)
-    print(LFrom)
-    offerData=offerARide(email_id=emailSES,uname=username,date=Date,leavingfrom=LFrom,goingto=Gto,noOfPassenger=nofp,phoneNO=phoneNO)
+    print(username)
+    print(phoneNO)
+    offerData=offerARide(email_id=emailSES,uname=username,date=Date,leavingfrom=LFrom,goingto=Gto,noOfPassenger=nofp,phoneNo=phoneNO)
     offerData.save()
+    print(offerData)
     return HttpResponse('200')
    except:
-     return HttpResponse('401')
+    return HttpResponse('401')
    
       
   
-  else:   
-      return render(request,'offerRide.html')
+  else:
+     try:   
+      login=request.session['login']
+      username=request.session['username']
+      return render(request,'offerRide.html',{'login':login,'username':username})
+     except:
+      login=False
+      return render(request,'offerRide.html',{'login':login})
 
 def offerRide(request):
    print("offerRide")
@@ -134,7 +149,14 @@ def searchRide(request):
         return HttpResponse("404")
 
    else:
-     return render(request,'search.html')
+      try:   
+       login=request.session['login']
+       username=request.session['username']
+       return render(request,'search.html',{'login':login,'username':username})
+      except:
+       login=False
+       return render(request,'search.html',{'login':login})
+    
 
 def otpScreen(request):
     
