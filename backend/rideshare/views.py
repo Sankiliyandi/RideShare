@@ -6,7 +6,7 @@ from .form import*
 from .models import user,offerARide
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.sessions.models import Session
-from .otpHandler import otp
+from .otpHandler import*
 import random
 
 # Create your views here.
@@ -54,14 +54,15 @@ def register(request):
          request.session['username']=username
          request.session['phoneNo']=phoneNo
          request.session['login']=True
-         userLog=user.objects.get(email_id=emailId)
-         request.session['username']=userLog.uname
+         # userLog=user.objects.get(email_id=emailId)
+         # request.session['username']=userLog.uname
          phone="+91"+phoneNo 
          rcode=random.randint(1000,9999)
          code=str(rcode)
          request.session['otpcode']=code
          print(phone) 
-         otp(phone,code)
+         send_otp_to_phone(phoneNo,code)
+         #otp(phone,code)
          return HttpResponseRedirect("otp")
       
 def loginform(request):
