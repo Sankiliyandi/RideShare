@@ -418,7 +418,7 @@
                 <p>umane</p>
             </div>
         </div> -->
-
+        </a>
     </div>
     <h1 class="text-center m-3">Travel for less on these popular routes</h1>
     <div class="container">
@@ -461,7 +461,7 @@
                             // console.log(data.length)
                         for (var i = 0; i < data.length; i++) {
 
-                            var d = $('<div class="row mt-3" style="background-color: #1B1B1B;  border-radius: 7px;  padding: 15px;">' + ' <div class="col-6"><ul><h3><li style="color: white;">' + data[i]["fields"]["leavingfrom"] + '</li></h3><h3><li style="color: white;">' + data[i]["fields"]["goingto"] + '</li></h3></ul><h5 style=" color: white; padding-left:4px;">' + data[i]["fields"]["uname"] + '</h5></div><div class="col-6 text-end"><div><h4 style="color: white;">$200</h4></div><div><i class="fa fa-user-circle-o" aria-hidden="true" style="color: red;"></i><p style="color:white;">' + data[i]["fields"]["noOfPassenger"] + '</p></div><p style="color:white;">' + data[i]["fields"]["phoneNo"] + '</p></div></div>')
+                            var d = $('<div class="row mt-3" style="background-color: #1B1B1B;  border-radius: 7px;  padding: 15px;">' + ' <div class="col-6"><ul><h3><li style="color: white;">' + data[i]["fields"]["leavingfrom"] + '</li></h3><h3><li style="color: white;">' + data[i]["fields"]["goingto"] + '</li></h3></ul><h5 style=" color: white; padding-left:4px;">' + data[i]["fields"]["uname"] + '</h5></div><div class="col-6 text-end"><div><h4 style="color: white;">$200</h4></div><div><i class="fa fa-user-circle-o" aria-hidden="true" style="color: red;"></i><p style="color:white;">' + data[i]["fields"]["noOfPassenger"] + '</p></div><p style="color:white;">' + data[i]["fields"]["phoneNo"] + '</p> <a href="booking/' + data[i]["fields"]["email_id"] + '&&' + data[i]["fields"]["leavingfrom"] + '&&' + data[i]["fields"]["goingto"] + '"> <button class="btn" >Book</button></a></div></div>')
                             $('#res').append(d);
                         }
                     }

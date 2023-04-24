@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout' ,logout,name='logout'),
     path('search',searchRide,name='search'),
     path('offer',offerpost,name='offer'),
+    path('booking/<User>&&<From>&&<to>',booking,name='booking'),
 ]

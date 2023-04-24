@@ -1,0 +1,459 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a ride</title>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/a53a8629e3.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</head>
+<style>
+    *,
+    *:after,
+    *:before {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+    }
+    
+    html,
+    body {
+        /* background: #D3D3D3; */
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    .navbar {
+        background-color: #1B1B1B;
+        font-weight: bold;
+    }
+    
+    .navbar-brand {
+        color: red;
+    }
+    
+    .navbar-brand:hover {
+        color: red;
+    }
+    
+    .navbar-toggler {
+        border-color: white;
+    }
+    
+    .navbar-toggler-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: red;
+    }
+    
+    a {
+        color: red;
+    }
+    
+    input {
+        background-color: #353839;
+        border-color: white;
+        color: white;
+        padding: 13px;
+        width: 90%;
+        margin-left: 10px;
+        color: #708c91;
+        height: 25px;
+        border: none;
+        border-radius: 4px;
+        font-size: medium;
+        font-weight: 600;
+    }
+    
+    input:focus {
+        outline: 0;
+    }
+    
+    .btnd {
+        align-self: center;
+        justify-self: center;
+    }
+    
+    h6 {
+        color: white;
+    }
+    
+    .btn {
+        text-align: center;
+        width: 400px;
+        height: 35px;
+        border-color: red;
+        background-color: red;
+        color: white;
+        /* border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px; */
+        outline-width: 0;
+        outline-color: red;
+        /* font-size: larger;
+    font-weight: 700; */
+    }
+    
+    .btn:hover {
+        color: white;
+    }
+    
+    .btn:focus {
+        outline: 0;
+        outline-color: red;
+    }
+    
+    .b {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-items: center;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: #1B1B1B;
+        width: 250px;
+        height: 290px;
+        padding: 10px;
+        /* border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px; */
+    }
+    
+    @media screen and (min-width:800px) {
+        .bod {
+            position: absolute;
+            z-index: 1000;
+            bottom: 150px;
+        }
+    }
+    
+    @media screen and (max-width:800px) {
+        .bod {
+            z-index: 1000;
+            bottom: 150px;
+            position: absolute;
+        }
+    }
+    
+    .driver {
+        /* font-size: 25px;
+    font-weight: 900; */
+        text-align: center;
+    }
+    
+    h1 {
+        color: white;
+    }
+    
+    .carpool {
+        margin-top: 40px;
+        margin-bottom: 20px;
+    }
+    
+    h4 {
+        font-weight: 900;
+        color: red;
+    }
+    
+    h5 {
+        color: #1B1B1B;
+        font-weight: 600;
+    }
+    
+    p {
+        color: #414A4C;
+        font-weight: 400;
+    }
+    
+    .poolct {
+        margin-top: 20px;
+    }
+    
+    .botf {
+        background-color: #1B1B1B;
+        padding: 30px;
+    }
+    
+    .fct {
+        color: red;
+    }
+    
+    li {
+        color: white;
+    }
+    
+    i {
+        margin: 2px;
+        size: 20px;
+    }
+    
+    .em {
+        height: 100px;
+    }
+    
+    .safe {
+        background-color: #1B1B1B;
+    }
+    
+    .bcard {
+        background-color: #1B1B1B;
+        width: 400px;
+        height: 120px;
+        border-radius: 10px;
+        padding: 5px;
+        margin-top: 10px;
+    }
+    
+    h1 {
+        color: black;
+    }
+    
+    h3 {
+        color: red;
+    }
+    
+    .bcard1 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 400px;
+        height: 80px;
+    }
+    
+    .bcard2 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 400px;
+        height: 80px;
+        flex-direction: row;
+    }
+    
+    .checked {
+        color: yellow;
+        font-size: 20px;
+    }
+    
+    .unchecked {
+        font-size: 20px;
+    }
+    
+    .rate {
+        float: left;
+        height: 46px;
+        padding: 0 10px;
+    }
+    
+    .rate:not(:checked)>input {
+        position: absolute;
+        top: -9999px;
+    }
+    
+    .rate:not(:checked)>label {
+        float: right;
+        width: 1em;
+        overflow: hidden;
+        white-space: nowrap;
+        cursor: pointer;
+        font-size: 30px;
+        color: #ccc;
+    }
+    
+    .rate:not(:checked)>label:before {
+        content: '★ ';
+    }
+    
+    .rate>input:checked~label {
+        color: #ffc700;
+    }
+    
+    .rate:not(:checked)>label:hover,
+    .rate:not(:checked)>label:hover~label {
+        color: #deb217;
+    }
+    
+    .rate>input:checked+label:hover,
+    .rate>input:checked+label:hover~label,
+    .rate>input:checked~label:hover,
+    .rate>input:checked~label:hover~label,
+    .rate>label:hover~input:checked~label {
+        color: #c59b08;
+    }
+    /*         
+    .b:last-child {
+      
+    } */
+</style>
+
+<body>
+    <div> {% include 'navbar.html' %}
+    </div>
+    <div class="container text-center mt-4">
+
+        <h1>
+            {{date}}
+        </h1>
+        <div class="divider" style="height: 10px;  background-color:#EDEDED;">
+            <hr style="background-color:#EDEDED;">
+        </div>
+        <div class="container bcard text-center mb-2">
+            <h3>
+                Sivakasi
+            </h3>
+
+            <!-- <i class="fa-solid fa-grip-lines-vertical"></i> -->
+            <i class="fa-sharp fa-solid fa-arrow-down" style="color: red;"></i>
+
+
+            <h3>
+                satur
+            </h3>
+        </div>
+        <div class="divider" style="height: 10px; background-color:#EDEDED;">
+            <hr style="background-color:#EDEDED;">
+        </div>
+        <div class="container bcard1 text-center">
+            <div>
+                <h5>Total price for 1 passenger</h5>
+            </div>
+            <div>
+
+                ₹470.00
+            </div>
+        </div>
+        <div class="divider" style="height: 10px; background-color:#EDEDED;">
+            <hr style="background-color:#EDEDED;">
+        </div>
+        <div class="container bcard1 text-center">
+            <div>
+                <h5>
+                    {{uname}}
+                    <input type="hidden" name="username" id="username" value=" {{uname}}">
+                    <input type="hidden" name="username" id="leavingfrom" value=" {{leavingfrom}}">
+                    <input type="hidden" name="username" id="goingto" value=" {{goingto}}">
+
+                </h5>
+                <h5>
+                    <span class="fa fa-star checked"></span> {{rating}}/5 - {{noOF}} rating
+                </h5>
+            </div>
+
+            <div>
+                <i class="fa-solid fa-user"></i>
+            </div>
+        </div>
+        <div class="divider" style="height: 10px; background-color:#EDEDED;">
+            <hr style="background-color:#EDEDED;">
+        </div>
+        <div class="container bcard1 text-center">
+            <div>
+                <i class="fa-solid fa-id-card"></i>
+            </div>
+            <div>
+                <h5>
+                    Max,2 in the back seat
+                </h5>
+            </div>
+
+        </div>
+        <div class="divider" style="height: 10px; background-color:#EDEDED;">
+            <hr style="background-color:#EDEDED;">
+        </div>
+        <div class="container bcard1 text-center">
+            <div>
+                <h5>Rate the rider</h5>
+            </div>
+            <div class="rate">
+                {% csrf_token %}
+                <input type="radio" id="star5" name="rate" value="5" />
+                <label for="star5" title="text">5 stars</label>
+                <input type="radio" id="star4" name="rate" value="4" />
+                <label for="star4" title="text">4 stars</label>
+                <input type="radio" id="star3" name="rate" value="3" />
+                <label for="star3" title="text">3 stars</label>
+                <input type="radio" id="star2" name="rate" value="2" />
+                <label for="star2" title="text">2 stars</label>
+                <input type="radio" id="star1" name="rate" value="1" />
+                <label for="star1" title="text">1 star</label>
+            </div>
+
+        </div>
+        <div class="divider" style="height: 10px; background-color:#EDEDED;margin-bottom: 20px;">
+            <hr style="background-color:#EDEDED;">
+        </div>
+        <div class="btnd text-center">
+            <button type="submit" class="btn" onclick="bookRide()" id="offer">Book a ride</button>
+        </div>
+        <div class="divider" style="height: 10px; background-color:#EDEDED;margin-bottom: 10px;">
+            <hr style="background-color:#EDEDED;">
+        </div>
+    </div>
+    {% include 'footer.html' %}
+    <script>
+        $(document).ready(function() {
+            username = $('#username').val()
+            from = $('#leavingfrom').val()
+            to = $('#gtoingto').val()
+        })
+
+        function bookRide() {
+            swal("Booked!", "you successfully book a ride happy journey!", "success")
+        }
+        $('#star5').click(function() {
+            tt = $("#star5").val();
+
+            rate(tt)
+        })
+        $('#star4').click(function() {
+            tt = $("#star4").val();
+
+            rate(tt)
+        })
+        $('#star3').click(function() {
+            tt = $("#star3").val();
+
+            rate(tt)
+        })
+        $('#star2').click(function() {
+            tt = $("#star2").val();
+
+            rate(tt)
+        })
+        $('#star1').click(function() {
+            tt = $("#star1").val();
+
+            rate(tt)
+        })
+
+        function rate(value) {
+            console.log(value)
+            $.ajax({
+                    method: "POST",
+                    url: "{{email_id}}&&{{leavingfrom}}&&{{goingto}}",
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    data: {
+                        'rate': value
+                    }
+                })
+                .done(function(offerData) {
+
+
+
+                    swal("rated", "thanks for your rating!", "success");
+                });
+        }
+    </script>
+</body>
+
+</html>

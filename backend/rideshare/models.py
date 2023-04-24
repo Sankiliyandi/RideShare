@@ -11,6 +11,9 @@ class user(models.Model):
            email_id=models.EmailField(primary_key=True)
            password=models.CharField(max_length=100)
            phoneNo=models.CharField(max_length=10)
+           rating=models.FloatField(max_length=5)
+           noOfRaters=models.FloatField()
+
 
 # class offerRide(models.Model):
 #            emai_id=models.EmailField()
@@ -18,7 +21,7 @@ class user(models.Model):
 #            data=models.DateField()
 #            leavingfrom=models.TextField()
 #            goingto=models.TextField()
-
+ 
 class offerARide(models.Model):
            email_id=models.EmailField()
            uname=models.CharField(max_length=50)

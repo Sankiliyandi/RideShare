@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.sessions.models import Session
 from .otpHandler import*
 import random
+from django.views.decorators.csrf import csrf_protect
+
 
 # Create your views here.
 @csrf_exempt
@@ -179,9 +181,45 @@ def otpScreen(request):
         else:
            messages.error(request,'incorrect code')
            return render(request,'otp.html') 
-        
+
+@csrf_protect
+def booking(request,User,From,to):
+   if(request.method=="GET"):
+     userLog=offerARide.objects.get(email_id=User,leavingfrom=From,goingto=to)
+     userData=user.objects.get(email_id=User)
+     username2=userLog.uname
+     noOf=int(userData.noOfRaters)
+     _date=userLog.date
+     login=request.session['login']
+     username=request.session['username']
+     print(_date)
+     print(From)
+     return render(request,'booking.html',
+     {"email_id":User,
+     "login":login,
+     'username':username,
+     "uname":username2,"date":_date,
+     "leavingfrom":From,"goingto":to,
+     "rating":userData.rating,
+     "noOF":noOf})
+   else:    
+       rate1=request.POST.get('rate')
+       rate=float(rate1)
+       print(rate)
+       userData=user.objects.get(email_id=User)
+       userRating=userData.rating
+       noOfRater=userData.noOfRaters
+       newRate=(rate+userRating)/(noOfRater+1)
+       print(newRate)
+       userData.noOfRaters=noOfRater+1
+       userData.rating=newRate
+       userData.save()
+       return HttpResponse('200')
+# def rating(request):
+#    if(request.method=="POST"):
+      
        
-   
+#        return
  
  
  
