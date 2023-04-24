@@ -184,6 +184,9 @@ def otpScreen(request):
 
 @csrf_protect
 def booking(request,User,From,to):
+   #=============================================#
+                    #BOOKING
+   #=============================================#    
    if(request.method=="GET"):
      userLog=offerARide.objects.get(email_id=User,leavingfrom=From,goingto=to)
      userData=user.objects.get(email_id=User)
@@ -202,6 +205,9 @@ def booking(request,User,From,to):
      "leavingfrom":From,"goingto":to,
      "rating":userData.rating,
      "noOF":noOf})
+   #=============================================#
+                    #RATING
+   #=============================================#                 
    else:    
        rate1=request.POST.get('rate')
        rate=float(rate1)
@@ -209,7 +215,7 @@ def booking(request,User,From,to):
        userData=user.objects.get(email_id=User)
        userRating=userData.rating
        noOfRater=userData.noOfRaters
-       newRate=(rate+userRating)/(noOfRater+1)
+       newRate=(rate+userRating)/(noOfRater+1.0)
        print(newRate)
        userData.noOfRaters=noOfRater+1
        userData.rating=newRate
